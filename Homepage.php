@@ -100,9 +100,13 @@ background-image:url("benito/bg201.gif");
         </tr>
         <tr align="center">
           <td height="61"><span class="style7">This website is for the <a href="workers.php"><acronym title="who is this?">workers</acronym></a> of our company to view the details they are to know.</span></td>
+          
         </tr>
         <tr align="center">
-          <td valign="top"><span class="style7">The <a href="Login.php">manager's</a> details begins here.</span></td>
+          <td height="61"><span class="style7">This website is for the <a href="saleslogin.php"><acronym title="who is this?">Sales</acronym></a> of our company to view the details they are to know.</span></td>
+        </tr>
+        <tr align="center">
+          <td valign="top" align="right" colspan="2"><span class="style7">The <a href="Login.php">manager's</a> details begins here.</span></td>
         </tr>
       </table>
 	   <p>
