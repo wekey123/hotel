@@ -12,7 +12,7 @@ if($_SESSION['user'] == "")
 <title>Untitled Document</title>
 </head>
 
-<frameset rows="158,*" cols="*" framespacing="0" frameborder="no" border="0">
+<frameset rows="170,*" cols="*" framespacing="0" frameborder="no" border="0">
   <frame src="tabs.php" name="frame1" scrolling="No" noresize="noresize" id="frame1" title="leftFrame" />
   <frame src="stockin.php" name="frame2" id="frame2" title="mainFrame" />
 </frameset>

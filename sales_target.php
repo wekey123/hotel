@@ -112,7 +112,7 @@ $sql2 = mysqli_query($con,"select * from sale_users");
 ?>
 <form id="form1" name="form1" method="post" action="">
   <div align="center">
-    <p>&nbsp;</p>
+     <p><a href="sale_target_list.php" target="frame2">Sales Target List</a></p>
     <table width="455" height="177" border="1" cellpadding="0" cellspacing="0" bordercolor="#0033FF">
       <tr>
         <th width="425" scope="col"><table width="424" height="156" border="0" cellpadding="0" cellspacing="0">
@@ -121,7 +121,7 @@ $sql2 = mysqli_query($con,"select * from sale_users");
             <td height="41" colspan="2" align="center"><span class="style1">SET SALES TARGET</span></td>
           </tr>
           <tr>
-            <td height="41" colspan="2" align="center">
+            <td height="41" colspan="2" align="center" style="color:#b91919 ">
 				<?php
 				if(isset($_GET['flag'])){ 
 					$flag = $_GET['flag'];
