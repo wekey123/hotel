@@ -103,9 +103,9 @@ if($_GET['id']){
 }else{
 header("Location: salesblank.php");
 }
-$x1 = mysqli_query($con,"select sales_id,target,completed from sale_targets where id = '$pid'");
+$x1 = mysqli_query($con,"select p_id,sales_id,target,completed from sale_targets where id = '$pid'");
 $x2 = mysqli_fetch_array($x1,MYSQLI_ASSOC);
-$x2pid=$x2['sales_id'];
+$x2pid=$x2['p_id'];
 $x3 = mysqli_query($con,"select prod_name from productlist where prod_id = '$x2pid'");
 $ing = mysqli_fetch_array($x3);
 ?>
