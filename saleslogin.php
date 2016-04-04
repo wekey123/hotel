@@ -117,7 +117,7 @@ else
             <tr>
             <td width="240" height="41" align="center">USERNAME</td>
             <td width="183" align="center"><label>
-              <input name="username" type="password" id="username" />
+              <input name="username" type="text" id="username" />
             </label></td>
           </tr>
             
