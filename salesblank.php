@@ -23,6 +23,18 @@ text-decoration:underline;
 	margin-top:5%;
 	margin-left:15%;
 }
+th
+{
+font-family: georgia;
+color:#0066FF;
+text-decoration:none;
+}
+td
+{
+font-family: georgia;
+color:#0066FF;
+text-decoration:none;
+}
 </style>
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -34,7 +46,7 @@ text-decoration:underline;
 <div class="wrapper">
 <h3>Daily Target List</h3>
 
-<table border="1" cellpadding="5" cellspacing="5" width="75%">
+<table border="1" cellpadding="0" cellspacing="0" width="75%" bordercolor="#0000EE">
 <tr><th>SI.No</th><th>Product Name</th><th>Assigned Target</th><th>Completed Target</th><th>Update Target</th></tr>
 
  <?php
@@ -50,11 +62,11 @@ text-decoration:underline;
 		//echo $x2['id'];
 	  ?>
         <tr>
-          <td scope="row"><?php echo $i;?></td>
-          <td  scope="row"><?php echo $ing['prod_name'];?></td>
-          <td  scope="row"><?php echo $x2['target'];?></td>
-          <td  scope="row"><?php echo $x2['completed'];?></td>
-          <td  scope="row"><a href="sales_update.php?id=<?php echo $x2['id'];?>">Edit</a></td>
+          <td><?php echo $i;?></td>
+          <td><?php echo $ing['prod_name'];?></td>
+          <td><?php echo $x2['target'];?></td>
+          <td><?php echo $x2['completed'];?></td>
+          <td><a href="sales_update.php?id=<?php echo $x2['id'];?>">Edit</a></td>
         </tr>
         <?php
   		$i++;}

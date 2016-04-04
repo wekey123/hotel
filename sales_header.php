@@ -59,9 +59,9 @@ text-decoration:underline;
 <table width="908" height="36" border="0" align="center">
   <tr>
     <th width="312" scope="col"><a href="Homepage.php" target="_top">Home</a></th>
+    <th width="312" scope="col"><a href="saleshome.php" target="_top">Target List</a></th>
+    <th width="312" scope="col"><a href="sreport.php" target="_top">Report</a></th>
     <th width="312" scope="col"><a href="signout.php" target="_top">Signout</a></th>
-    <th width="303" scope="col"><a href="salesblank.php" target="frame2"><img src="benito/progress.gif" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.6;this.filters.alpha.opacity=40" /></a></th>
-    <th width="279" scope="col"><a href="sales_report.php" target="frame2"><img src="benito/projection.gif" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.6;this.filters.alpha.opacity=40" /></a></th>
   </tr>
 </table>
 </body>

@@ -1,3 +1,8 @@
+<?php
+session_start();
+$con = mysqli_connect("localhost","root","");
+mysqli_select_db($con,"ben");
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -118,16 +123,25 @@ text-decoration:underline;
             </select>
           </label></th>
         </tr>
-        <tr>
-          <th height="32" scope="col"><label>
-            <input name="opt" type="radio" value="purchase1" />
-            Daily Target</label></th>
-          <th scope="col"><input name="opt" type="radio" value="purchase2" />
-            Monthly Target </th>
-          <th colspan="2" align="center" scope="col"><label>
-            <input name="opt" type="radio" value="production" />
-            Production </label></th>
-        </tr>
+        
+        <?php /*?><tr>
+       
+            <td height="29" colspan="2" align="center"><label>Location</label>
+            
+              <select name="sacatlist" id="sacatlist">
+                <option>Select a Location</option>
+                <?php  $sql = "select * from sale_users";
+					 $res = mysqli_query($con,$sql);
+					 while($row = mysqli_fetch_array($res))
+					 {  ?>
+                <option value="<?php echo $row['location'];?>"><?php echo $row['location'];?></option>
+                 <?php } ?>
+              </select>
+            </label></td>
+         
+      </tr><?php */?>
+        
+        
         <tr>
           <th height="28" colspan="4" scope="col"><label>
             <input name="sub" type="submit" id="sub" value="Display Graph" onclick="return validate()"/>
