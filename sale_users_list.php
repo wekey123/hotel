@@ -64,7 +64,7 @@ td,th {
 <form id="form1" name="form1" method="post" action="#">
   <div align="center">
   	
-    <p><a href="sale_users_list.php" target="frame2">Sales Executive List</a></p>
+    <p><a href="sale_users.php" target="frame2">Sales Executive Form</a></p>
     <table  border="1" cellpadding="0" cellspacing="0" bordercolor="#0033FF">
       <tr>
         <th>Sno</th>

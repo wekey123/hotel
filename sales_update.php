@@ -3,8 +3,15 @@ include("dbcon.php");
 
 if(!empty($_POST) && !empty($_POST['updatetarget'])){
 	extract($_POST);
+	if($actual == ($target + $finished)){
+		$status = 2;
+	}else if($actual > ($target + $finished)){
+		$status = 1;
+	}else{
+		$status = 0;
+	}
 	$date = date("Y-m-d");
-	$sql="update sale_targets set completed = completed + '$target' where id = '$targetid'";	
+	$sql="update sale_targets set completed = completed + '$target',status = $status where id = '$targetid'";	
 	if (mysqli_query($con,$sql)) {
 		$flag = 1;
 	} else {
@@ -20,11 +27,22 @@ if(!empty($_POST) && !empty($_POST['updatetarget'])){
 <script type="text/javascript" language="javascript">
 function validate()
 {
-    if(document.form1.completed.value > (document.form1.actual.value - document.form1.finished.value))
+     if(document.form1.target.value == "")
+    {
+      alert("Enter the Completed Target value");
+	  document.form1.target.focus();
+	  return false;
+    }else if(document.form1.target.value == 0)
+    {
+      alert("Target value zero not allow");
+	  document.form1.target.focus();
+	  return false;
+    }else if(document.form1.completed.value > (document.form1.actual.value - document.form1.finished.value))
 	{
 		alert("Enter Less then Actual target");
 		return false;
 	}
+	return true;
 }
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -99,7 +117,7 @@ $ing = mysqli_fetch_array($x3);
         <th width="425" scope="col"><table width="424" height="156" border="0" cellpadding="0" cellspacing="0">
 
           <tr>
-            <td height="41" colspan="2" align="center"><span class="style1">SET SALES TARGET</span></td>
+            <td height="41" colspan="2" align="center"><span class="style1">UPDATE SALES TARGET</span></td>
           </tr>
           <tr>
             <td height="41" colspan="2" align="center">
@@ -111,9 +129,6 @@ $ing = mysqli_fetch_array($x3);
 				?>
             </td>
             </tr>
-            
-          
-          
           <tr>
             <td width="240" height="41" align="center">Product Name</td>
             <td width="183" align="center"><label>
@@ -136,8 +151,10 @@ $ing = mysqli_fetch_array($x3);
             </td>
           </tr>
           <tr>
+         	 <?php if($x2['completed']  !=  $x2['target']) { ?>
             <td width="240" height="41" align="center">Completed Target</td>
             <td width="183" align="center"><label>
+            
                <input type="text" name="target" id="completed"/>
                <input type="hidden" name="actual" id="actual" value="<?php echo $x2['target'];?>"/>
                <input type="hidden" name="finished" id="finished" value="<?php echo $x2['completed'];?>"/>
@@ -145,12 +162,15 @@ $ing = mysqli_fetch_array($x3);
                </label>
             </td>
           </tr>
- 
+ 			
             <td height="33" colspan="2"><p align="center">
                 <label>
                 <input name="updatetarget" type="submit" id="updatetarget" value="Submit" onclick="return validate()"/>
                 </label>
             </p></td>
+             <?php }else{ ?>
+			  <td colspan="2" width="240" height="41" align="center"><p align='center' style="color:green">Target Completed </p></td>
+			 <?php } ?>
           </tr>
         </table></th>
       </tr>
