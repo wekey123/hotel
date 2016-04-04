@@ -26,7 +26,7 @@ text-decoration:underline;
 </head>
 
 <frameset rows="67,*" cols="*" framespacing="0" frameborder="no" border="0">
-  <frame src="tabs2.php" name="frame1" scrolling="No" noresize="noresize" id="leftFrame" title="leftFrame" />
+  <frame src="sales_header.php" name="frame1" scrolling="No" noresize="noresize" id="leftFrame" title="leftFrame" />
   <frame src="salesblank.php" name="frame2" id="mainFrame" title="mainFrame" />
 </frameset>
 <noframes><body background="benito/bg201.gif">

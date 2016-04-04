@@ -69,6 +69,10 @@ border-style:groove;
 <body background="benito/bg201.gif">
 <?php
 include("dbcon.php");
+
+if(isset($_SESSION['sales']['id']))
+header("Location: saleshome.php");
+else{
 extract($_POST);
 $datt = date("Y-m-d");
 if(isset($plog))
@@ -96,7 +100,7 @@ else
 }  
 else
    $msg = "You are requested to enter the password";
-?>
+}?>
 <form id="form1" name="form1" method="post" action="">
   <div align="center">
     <p>&nbsp;</p>
