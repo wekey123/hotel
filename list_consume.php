@@ -136,7 +136,8 @@ if(isset($_GET['listid']))
 	 	$ing = mysqli_fetch_array($x3);
 	  ?>
         <tr>
-          <th colspan="2" scope="row"><?php echo $ing['item_name'];?></th>
+          <th  scope="row"><?php echo $ing['item_name'];?></th>
+          <th  scope="row"><?php echo $x2['quantity'];?></th>
         </tr>
         <?php
   		}
