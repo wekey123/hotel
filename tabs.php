@@ -69,14 +69,14 @@ text-decoration:underline;
   <tr>
     <th scope="col"><a href="stockin.php" target="frame2"></a> <a href="work1.php" target="frame2"><img src="benito/progress.gif" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.6;this.filters.alpha.opacity=40" /></a></th>
     <th scope="col"><a href="ex.php" target="frame2"><img src="benito/projection.gif" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.6;this.filters.alpha.opacity=40" /></a><a href="report.php" target="frame2"></a><a href="stockcon1.php" target="frame2"></a></th>
-    <th scope="col"><a href="report.php" target="frame2"><img src="benito/report.gif" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.6;this.filters.alpha.opacity=40" /></a><a href="work1.php" target="frame2"></a></th>
+    <th scope="col"><a href="sales_report.php" target="frame2"><img src="benito/report.gif" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.6;this.filters.alpha.opacity=40" /></a><a href="work1.php" target="frame2"></a></th>
   </tr>
   <tr>
     <th scope="col"><a href="sale_users.php" target="frame2">Sales Executive Form</a></th>
     
     <th scope="col"><a href="sales_target.php" target="frame2">Sales Target Form</a></th>
     
-    <th scope="col"><a href="sale_report_list.php" target="frame2">Sales Report View</a></th>
+    <th scope="col"><a href="sales_report.php" target="frame2">Sales Report View</a></th>
   </tr>
    <tr>
      <th colspan="3" scope="col"><a href="signout.php" target="_top">Sign Out</a></th>
