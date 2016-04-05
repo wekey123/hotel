@@ -90,7 +90,7 @@ if($n['password'] == $manpass)
    }
    elseif($n['dat'] == $datt)
    { 
-		 header("Location: http://jeevanfootwear.in/hotel/left.php"); exit;
+		 header("Location: left.php"); exit;
    }
       ob_end_clean();
 }

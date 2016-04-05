@@ -69,7 +69,7 @@ border-style:groove;
 <body background="benito/bg201.gif">
 <?php
 include("dbcon.php");
-
+ob_start();
 if(isset($_SESSION['sales']['id']))
 header("Location: saleshome.php");
 else{
@@ -92,6 +92,7 @@ if($n['password'] == $password)
    {
 		header("Location: left.php");
    }
+   ob_end_clean();
 }
 else
 {
