@@ -1,5 +1,7 @@
 <?php
 session_start();
+include("dbcon.php");
+ob_start();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -67,8 +69,9 @@ border-style:groove;
 -->
 </style></head>
 <body background="benito/bg201.gif">
+
 <?php
-include("dbcon.php");
+//echo "<pre>"; print_r($_POST); exit;
 extract($_POST);
 $datt = date("Y-m-d");
 if(isset($plog))
@@ -86,9 +89,10 @@ if($n['password'] == $manpass)
 		header("Location: target.php");
    }
    elseif($n['dat'] == $datt)
-   {
-		header("Location: left.php");
+   { 
+		 header("Location: http://jeevanfootwear.in/hotel/left.php"); exit;
    }
+      ob_end_clean();
 }
 else
 {

@@ -1,7 +1,8 @@
 <?php
+include("dbcon.php");
 session_start();
-$con = mysqli_connect("localhost","root","") or die("Could not connect");
-mysqli_select_db($con,"ben");
+/*$con = mysqli_connect("localhost","root","") or die("Could not connect");
+mysqli_select_db($con,"ben");*/
 $id = $_GET['prodid'];
 $sql = mysqli_query($con,"select * from productlist where prod_id = '$id'");
 $row = mysqli_fetch_array($sql);

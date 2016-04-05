@@ -1,7 +1,8 @@
 <?php
+include("dbcon.php");
 session_start();
-$con = mysqli_connect("localhost","root","") or die("Could not connect");
-mysqli_select_db($con,"ben");
+/*$con = mysqli_connect("localhost","root","") or die("Could not connect");
+mysqli_select_db($con,"ben");*/
 $sql = mysqli_query($con,"select * from productlist where target != '0'");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
