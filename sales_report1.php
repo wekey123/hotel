@@ -83,209 +83,98 @@ switch($m2)
 		$mth2 = "December";
 		break;
 }
-
+$opt= 'purchase1';
 if($opt == "purchase1")
 {
 	$data1 = array();
-	$sql = mysqli_query($con,"select item_name,sum(quantity) quan,purchase_date from purchase_daily where purchase_date like '%/$m1/%' group by(item_name) ");
-	if(mysqli_num_rows($sql) != 0 )
-	{
-		while($row = mysqli_fetch_array($sql))
-		{
-   			array_push($data1,array($row['item_name'],$row['quan']));	
-		}
-		$chart1 = "yes";
-	}
-	else
-	{
-		$chart1 = "no";
-	}
 	$data2 = array();
-	$sql = mysqli_query($con,"select item_name,sum(quantity) quan,purchase_date from purchase_daily where purchase_date like '%/$m2/%' group by(item_name) ");
-	if(mysqli_num_rows($sql) != 0)
-	{
-		while($row = mysqli_fetch_array($sql))
-		{
-   			array_push($data2,array($row['item_name'],$row['quan']));	
+	$sql1 = mysqli_query($con,"select * from sale_users");
+	$year= date("Y");
+	$chart1 ='no';$chart2 ='no';
+	if(mysqli_num_rows($sql1) != 0 ){
+		while($row1 = mysqli_fetch_array($sql1,MYSQLI_ASSOC)){
+			$id=$row1['id'];
+			$sql2 = mysqli_query($con,"select * from `sale_targets` where `created` BETWEEN '$year-$m1-01' AND '$year-$m1-31' and `sales_id` = $id ");
+			if(mysqli_num_rows($sql2) != 0 ){
+				$row2t=0;
+				$row2c=0;
+				while($row2 = mysqli_fetch_array($sql2,MYSQLI_ASSOC)){
+					$row2t +=$row2['target'];
+					$row2c +=$row2['completed'];
+				}
+				array_push($data1,array($row1['location'],$row2t,$row2c));
+				$chart1 = 'yes';
+				if(empty($data1))
+				$chart1 = 'no';
+			}
+			
+			$sql3 = mysqli_query($con,"select * from `sale_targets` where `created` BETWEEN '$year-$m2-01' AND '$year-$m2-31' and `sales_id` = $id ");
+			if(mysqli_num_rows($sql3) != 0 ){
+				$row3t=0;
+				$row3c=0;
+				while($row3 = mysqli_fetch_array($sql3,MYSQLI_ASSOC)){
+					//echo '<pre>';print_r($row3);
+					$row3t+=$row3['target'];
+					$row3c+=$row3['completed'];
+				}
+					array_push($data2,array($row1['location'],$row3t,$row3c));	
+					$chart2 = 'yes';
+					if(empty($data1))
+					$chart2 = 'no';
+			}
+		
 		}
-		$chart2 = "yes";
 	}
 	else
-	{
-		$chart2 = "no";
-	}
-	if($chart1 == "yes" and $chart2 == "yes")
-	{
-		$plot = new PHPlot(2000,1800);
-		$plot->SetImageBorderType('plain');
-		$plot->SetPrintImage(0);
-		$plot->SetTitle('Graph of Daily Purchase');
-		$plot->SetPlotAreaPixels(80, 40, 1040, 250);
-		$plot->SetDataType('text-data');
-		$plot->SetDataValues($data1);
-		$plot->SetPlotAreaWorld(NULL, 0, NULL, NULL);
-		$plot->SetDataColors(array('blue'));
-		$plot->SetYDataLabelPos('plotin');
-		$plot->SetXTickLabelPos('none');
-		$plot->SetXTickPos('none');
-		$plot->SetYTickIncrement(10);
-		$plot->SetYTitle("No. of Units purchased for $mth1");
-		$plot->SetPlotType('bars');
-		$plot->DrawGraph();
-		$plot->SetPlotAreaPixels(80, 300, 1040, 550);
-		$plot->SetDataType('text-data');
-		$plot->SetDataValues($data2);
-		$plot->SetPlotAreaWorld(NULL, 0, NULL, NULL);
-		$plot->SetDataColors(array('red'));
-		$plot->SetYDataLabelPos('plotin');
-		$plot->SetXTickLabelPos('none');
-		$plot->SetXTickPos('none');
-		$plot->SetYTickIncrement(10);
-		$plot->SetYTitle("No. of Units purchased in $mth2");
-		$plot->SetPlotType('bars');
-		$plot->DrawGraph();
-		$plot->PrintImage();
-	}
-	else
-	{
-		echo "Can't Draw Graph since Months chosen is invalid";
-	}
-}
-if($opt == "purchase2")
-{
-	$data1 = array();
-	$sql = mysqli_query($con,"select item_name,sum(quantity) quan,purchase_date from purchase_monthly where purchase_date like '%/$m1/%' group by(item_name) ");
-	if(mysqli_num_rows($sql) != 0 )
-	{
-		while($row = mysqli_fetch_array($sql))
-		{
-   			array_push($data1,array($row['item_name'],$row['quan']));	
-		}
-		$chart1 = "yes";
-	}
-	else
-	{
-		$chart1 = "no";
-	}
-	$data2 = array();
-	$sql = mysqli_query($con,"select item_name,sum(quantity) quan,purchase_date from purchase_monthly where purchase_date like '%/$m2/%' group by(item_name) ");
-	if(mysqli_num_rows($sql) != 0)
-	{
-		while($row = mysqli_fetch_array($sql))
-		{
-   			array_push($data2,array($row['item_name'],$row['quan']));	
-		}
-		$chart2 = "yes";
-	}
-	else
-	{
-		$chart2 = "no";
-	}
-	if($chart1 == "yes" and $chart2 == "yes")
-	{
+	$chart1 = "no1";
+	
+	//echo $chart1.'<br>';
+	//echo $chart2;
+	//echo '<pre>data2';print_r($data2);print_r($data1);exit;
+		if($chart1 == "yes" and $chart2 == "yes"){
 		$plot = new PHPlot(1000,800);
 		$plot->SetImageBorderType('plain');
 		$plot->SetPrintImage(0);
-		$plot->SetTitle('Graph of Monthly Purchase');
+		$plot->SetTitle('Graph of Sales Executive targerts by District');
 		$plot->SetPlotAreaPixels(80, 40, 740, 250);
+		# Make a legend for the 3 data sets plotted:
+		$plot->SetLegend(array('Actual Target', 'Completed Target'));
 		$plot->SetDataType('text-data');
 		$plot->SetDataValues($data1);
 		$plot->SetPlotAreaWorld(NULL, 0, NULL, NULL);
-		$plot->SetDataColors(array('blue'));
+		$plot->SetDataColors(array('blue','red'));
 		$plot->SetYDataLabelPos('plotin');
 		$plot->SetXTickLabelPos('none');
 		$plot->SetXTickPos('none');
 		$plot->SetYTickIncrement(10);
-		$plot->SetYTitle("No. of Units purchased for $mth1");
+		$plot->SetYTitle("No. of targets for $mth1");
 		$plot->SetPlotType('bars');
 		$plot->DrawGraph();
 		$plot->SetPlotAreaPixels(80, 300, 740, 550);
 		$plot->SetDataType('text-data');
+		# Make a legend for the 3 data sets plotted:
+		$plot->SetLegend(array('Actual Target', 'Completed Target'));
 		$plot->SetDataValues($data2);
 		$plot->SetPlotAreaWorld(NULL, 0, NULL, NULL);
-		$plot->SetDataColors(array('red'));
+		$plot->SetDataColors(array('blue','red'));
 		$plot->SetYDataLabelPos('plotin');
 		$plot->SetXTickLabelPos('none');
 		$plot->SetXTickPos('none');
 		$plot->SetYTickIncrement(10);
-		$plot->SetYTitle("No. of Units purchased in $mth2");
+		$plot->SetYTitle("No. of targets in $mth2");
 		$plot->SetPlotType('bars');
 		$plot->DrawGraph();
 		$plot->PrintImage();
-	}
+	 }
 	else
 	{
 		echo "Can't Draw Graph since Months chosen is invalid";
 	}
+
+
+
 }
 
-if($opt == "production")
-{
-	$data1 = array();
-	$sql = mysqli_query($con,"select * from consume where dat like '%-$m1-%'");
-	if(mysqli_num_rows($sql) != 0)
-	{
-		while($row = mysqli_fetch_array($sql))
-		{
-   			array_push($data1,array($row['prod_name'],$row['quantity']));
-		}
-		$chart1 = "yes";
-	}
-	else
-	{
-		$chart1 = "no";
-	}
-	$data2 = array();
-	$sql = mysqli_query($con,"select * from consume where dat like '%-$m2-%'");
-	if(mysqli_num_rows($sql) != 0)
-	{
-		while($row = mysqli_fetch_array($sql))
-		{
-   			array_push($data2,array($row['prod_name'],$row['quantity']));
-		}
-		$chart2 = "yes";
-	}
-	else
-	{
-		$chart2 = "no";
-	}
-	if($chart1 == "yes" and $chart2 == "yes")
-	{
-		$plot = new PHPlot(2000,1800);
-		$plot->SetImageBorderType('plain');
-		$plot->SetPrintImage(0);
-		$plot->SetTitle('Graph of Monthly Production');
-		$plot->SetPlotAreaPixels(80, 40, 1040, 250);
-		$plot->SetDataType('text-data');
-		$plot->SetDataValues($data1);
-		$plot->SetPlotAreaWorld(NULL, 0, NULL, NULL);
-		$plot->SetDataColors(array('blue'));
-		$plot->SetYDataLabelPos('plotin');
-		$plot->SetXTickLabelPos('none');
-		$plot->SetXTickPos('none');
-		$plot->SetYTickIncrement(1);
-		$plot->SetYTitle("No of packets produced for $mth1");
-		$plot->SetPlotType('bars');
-		$plot->DrawGraph();
-		$plot->SetPlotAreaPixels(80, 300, 1040, 550);
-		$plot->SetDataType('text-data');
-		$plot->SetDataValues($data2);
-		$plot->SetPlotAreaWorld(NULL, 0, NULL, NULL);
-		$plot->SetDataColors(array('red'));
-		$plot->SetYDataLabelPos('plotin');
-		$plot->SetXTickLabelPos('none');
-		$plot->SetXTickPos('none');
-		$plot->SetYTickIncrement(1);
-		$plot->SetYTitle("No of packets produced for $mth2");
-		$plot->SetPlotType('bars');
-		$plot->DrawGraph();
-		$plot->PrintImage();
-	}
-	else
-	{
-		echo "Can't Draw Graph since Months chosen is invalid";	
-	}
-}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

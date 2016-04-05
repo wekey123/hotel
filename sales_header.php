@@ -60,7 +60,7 @@ text-decoration:underline;
   <tr>
     <th width="312" scope="col"><a href="Homepage.php" target="_top">Home</a></th>
     <th width="312" scope="col"><a href="saleshome.php" target="_top">Target List</a></th>
-    <th width="312" scope="col"><a href="sreport.php" target="_top">Report</a></th>
+    <!--<th width="312" scope="col"><a href="sreport.php" target="_top">Report</a></th>-->
     <th width="312" scope="col"><a href="signout.php" target="_top">Signout</a></th>
   </tr>
 </table>
